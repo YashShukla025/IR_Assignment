@@ -1,54 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
-  <groupId>ie.tcd.dalyc24</groupId>
-  <artifactId>example2</artifactId>
-  <version>1.2</version>
-
-  <name>example2</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
-  </properties>
-
+  <groupId>IR_Project</groupId>
+  <artifactId>Lucene-Example</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
   <dependencies>
     <dependency>
       <groupId>org.apache.lucene</groupId>
       <artifactId>lucene-core</artifactId>
-      <version>8.10.1</version>
+      <version>8.10.0</version>
     </dependency>
-    <dependency>
-	<groupId>org.apache.lucene</groupId>
-	<artifactId>lucene-analyzers-common</artifactId>
-	<version>7.7.0</version>
-</dependency>
-<!-- Thanks for using https://jar-download.com -->
     
     <dependency>
-    	<groupId>org.apache.commons</groupId>
-	    <artifactId>commons-lang3</artifactId>
-	    <version>3.12.0</version>
+		<groupId>org.apache.lucene</groupId>
+		<artifactId>lucene-analyzers-common</artifactId>
+		<version>7.7.0</version>
 	</dependency>
+	
+	<dependency>
+        <groupId>org.apache.lucene</groupId>
+        <artifactId>lucene-queryparser</artifactId>
+        <version>8.10.0</version>
+    </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-  <groupId>org.apache.lucene</groupId>
-  <artifactId>lucene-queryparser</artifactId>
-  <version>7.7.1</version>
-</dependency>
+    
   </dependencies>
-
+  
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
@@ -65,6 +48,10 @@
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
+          <configuration>
+                <source>7</source>
+                <target>7</target>
+            </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
@@ -117,4 +104,5 @@
       </plugin>
     </plugins>
   </build>
+  
 </project>
