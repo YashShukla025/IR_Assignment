@@ -2,8 +2,8 @@ package ie.tcd.yshukla;
 
 public class Main {
 	public static void main (String[] args) throws Exception {
-        Indexing indexing = new Indexing();
-        Querysearcher search = new Querysearcher();
+        CreateIndex indexing = new CreateIndex();
+        SearchQuery search = new SearchQuery();
 
         indexing.index();
         search.srch();

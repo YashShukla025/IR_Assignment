@@ -23,12 +23,15 @@ import org.apache.lucene.search.similarities.*;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
-public class Indexing {
+public class CreateIndex {
 
     /** Index all text files under a directory. */
     public void index() {
         String indexEnglish = "Index/English_analyzer";
+        
         String indexStandard = "Index/standard_analyzer";
+        String indexSimple = "Index/simple_analyzer";
+        
         String cran_path = "cran/cran.all.1400";
 
         final Path cranPath = Paths.get(cran_path);
@@ -40,31 +43,30 @@ public class Indexing {
 
         Date start = new Date();
         try {
-
+        	
             Directory indexEnglishDirectory = FSDirectory.open(Paths.get(indexEnglish));
             Directory indexStandardDirectory = FSDirectory.open(Paths.get(indexStandard));
+            Directory indexSimpleDirectory = FSDirectory.open(Paths.get(indexSimple));
+            
 
            
             Analyzer sAnalyzer = new StandardAnalyzer();
             Analyzer eAnalyser = new EnglishAnalyzer();
-            //Analyzer analyzer = new SimpleAnalyzer();
-            //Analyzer analyzer = new WhitespaceAnalyzer();
+            Analyzer simpleAnalyzer = new SimpleAnalyzer();
+
 
 			IndexWriterConfig iWCEnglish = new IndexWriterConfig(eAnalyser);
             IndexWriterConfig iWCStandard = new IndexWriterConfig(sAnalyzer);
+            IndexWriterConfig iWCSimple = new IndexWriterConfig(simpleAnalyzer);
 
-            //BM25 Similarity
-            //iwc.setSimilarity(new BM25Similarity());
 
-            //Classic Similarity
-            //iwc.setSimilarity(new ClassicSimilarity());
-
-            //LMDirichletSimilarity
-            //iwc.setSimilarity(new LMDirichletSimilarity());
-
+            iWCEnglish.setSimilarity(new BM25Similarity());
+            iWCStandard.setSimilarity(new BM25Similarity());
+            iWCSimple.setSimilarity(new BM25Similarity());
             //Trying a multi similarity model
-            iWCEnglish.setSimilarity(new MultiSimilarity(new Similarity[]{new BM25Similarity(),new ClassicSimilarity()}));
-            iWCStandard.setSimilarity(new MultiSimilarity(new Similarity[]{new BM25Similarity(),new ClassicSimilarity()}));
+//            iWCEnglish.setSimilarity(new MultiSimilarity(new Similarity[]{new BM25Similarity(),new ClassicSimilarity()}));
+//            iWCStandard.setSimilarity(new MultiSimilarity(new Similarity[]{new BM25Similarity(),new ClassicSimilarity()}));
+//            iWCSimple.setSimilarity(new MultiSimilarity(new Similarity[]{new BM25Similarity(),new ClassicSimilarity()}));
 
             //Trying another multi similarity model
             //iwc.setSimilarity(new MultiSimilarity(new Similarity[]{new BM25Similarity(),new LMDirichletSimilarity()}));
@@ -74,19 +76,24 @@ public class Indexing {
 
             iWCEnglish.setOpenMode(OpenMode.CREATE);
             iWCStandard.setOpenMode(OpenMode.CREATE);
+            iWCSimple.setOpenMode(OpenMode.CREATE);
 
             IndexWriter indexWriter1 = new IndexWriter(indexEnglishDirectory, iWCEnglish);
             IndexWriter indexWriter2 = new IndexWriter(indexStandardDirectory, iWCStandard);
+            IndexWriter indexWriter3 = new IndexWriter(indexSimpleDirectory, iWCSimple);
             
             indexDoc(indexWriter1, cranPath);
             indexDoc(indexWriter2, cranPath);
+            indexDoc(indexWriter3, cranPath);
 
             //Using writer.forceMerge to maximise search performance.
             indexWriter1.forceMerge(1);
             indexWriter2.forceMerge(1);
+            indexWriter3.forceMerge(1);
 
             indexWriter1.close();
             indexWriter2.close();
+            indexWriter3.close();
 
             Date end = new Date();
             System.out.println(end.getTime() - start.getTime() + " total milliseconds");
@@ -153,7 +160,7 @@ public class Indexing {
                         contnt += line + " ";
                         line = bufferedReader.readLine();
                     }
-                    //Not storing the words in an attempt to save storage space.
+                    
                     doc.add(new TextField("Words", contnt, Field.Store.YES));
                     contnt = "";
                 }
