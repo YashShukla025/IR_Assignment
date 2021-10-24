@@ -60,9 +60,13 @@ public class CreateIndex {
             IndexWriterConfig iWCSimple = new IndexWriterConfig(simpleAnalyzer);
 
 
-            iWCEnglish.setSimilarity(new BM25Similarity());
-            iWCStandard.setSimilarity(new BM25Similarity());
-            iWCSimple.setSimilarity(new BM25Similarity());
+            iWCEnglish.setSimilarity(new ClassicSimilarity());
+            iWCStandard.setSimilarity(new ClassicSimilarity());
+            iWCSimple.setSimilarity(new ClassicSimilarity());
+            
+//            iWCEnglish.setSimilarity(new BM25Similarity());
+//            iWCStandard.setSimilarity(new BM25Similarity());
+//            iWCSimple.setSimilarity(new BM25Similarity());
             //Trying a multi similarity model
 //            iWCEnglish.setSimilarity(new MultiSimilarity(new Similarity[]{new BM25Similarity(),new ClassicSimilarity()}));
 //            iWCStandard.setSimilarity(new MultiSimilarity(new Similarity[]{new BM25Similarity(),new ClassicSimilarity()}));

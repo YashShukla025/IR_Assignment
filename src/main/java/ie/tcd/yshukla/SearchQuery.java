@@ -64,9 +64,9 @@ public class SearchQuery {
         //searcher.setSimilarity(new LMDirichletSimilarity());
 
         //Trying a multi similarity model
-        search_english.setSimilarity(new BM25Similarity());
-        search_stndrd.setSimilarity(new BM25Similarity());
-        search_simple.setSimilarity(new BM25Similarity());
+        search_english.setSimilarity(new ClassicSimilarity());
+        search_stndrd.setSimilarity(new ClassicSimilarity());
+        search_simple.setSimilarity(new ClassicSimilarity());
 
 //        search_english.setSimilarity(new MultiSimilarity(new Similarity[]{new BM25Similarity(),new ClassicSimilarity()}));
 //        search_stndrd.setSimilarity(new MultiSimilarity(new Similarity[]{new BM25Similarity(),new ClassicSimilarity()}));
