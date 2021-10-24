@@ -111,6 +111,7 @@ public class SearchQuery {
             queryString = "";
             performSearch(search_english, pwenglish, Integer.parseInt(id), query1);
             performSearch(search_stndrd, pwstndrd, Integer.parseInt(id), query2);
+            performSearch(search_simple, pwsimple, Integer.parseInt(id), query3);
         }
 
         System.out.println("Results have been written to the 'results_english.txt' and 'results_standard.txt' file.");
