@@ -138,18 +138,24 @@ public class SearchQuery {
             performSearch(search_english, pwenglish, Integer.parseInt(id), query1);
             performSearch(search_stndrd, pwstndrd, Integer.parseInt(id), query2);
             performSearch(search_simple, pwsimple, Integer.parseInt(id), query3);
-            performSearch(search_english, pwenglish2, Integer.parseInt(id), query11);
-            performSearch(search_stndrd, pwstndrd2, Integer.parseInt(id), query22);
-            performSearch(search_simple, pwsimple2, Integer.parseInt(id), query33);
+            performSearch(search_english2, pwenglish2, Integer.parseInt(id), query11);
+            performSearch(search_stndrd2, pwstndrd2, Integer.parseInt(id), query22);
+            performSearch(search_simple2, pwsimple2, Integer.parseInt(id), query33);
         }
 
         System.out.println("Results have been written to the 'results_english.txt' and 'results_standard.txt' file.");
         pwenglish.close();
         pwstndrd.close();
         pwsimple.close();
+        pwenglish2.close();
+        pwstndrd2.close();
+        pwsimple2.close();
         reader1.close();
         reader2.close();
         reader3.close();
+        reader11.close();
+        reader22.close();
+        reader33.close();
     }
 
 
