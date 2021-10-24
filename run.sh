@@ -1,4 +1,4 @@
-mvn clean package
+mvn clean
 
 java -jar target/Lucene-Example-0.0.1-SNAPSHOT.jar
 
