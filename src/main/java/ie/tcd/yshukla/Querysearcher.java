@@ -29,7 +29,7 @@ public class Querysearcher {
     public void srch() throws Exception {
 
     	String indexEnglish = "Index/English_analyzer";
-        String indexStandard = "index/standard_analyzer";
+        String indexStandard = "Index/standard_analyzer";
         String queryString = "";
 
         IndexReader reader1 = DirectoryReader.open(FSDirectory.open(Paths.get(indexEnglish)));
@@ -117,7 +117,7 @@ public class Querysearcher {
         // To write the results for each hit in the format expected by the trec_eval tool.
         for (int i = 0; i < hits.length; i++) {
             Document doc = searcher.doc(hits[i].doc);
-            writer.println(queryNumber + " 0 " + doc.get("id") + " " + i + " " + hits[i].score + " ANALYSIS");
+            writer.println(queryNumber + " Q0 " + doc.get("ID") + " " + i + " " + hits[i].score + " ANALYSIS");
         }
     }
 }

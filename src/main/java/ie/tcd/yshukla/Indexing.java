@@ -28,7 +28,7 @@ public class Indexing {
     /** Index all text files under a directory. */
     public void index() {
         String indexEnglish = "Index/English_analyzer";
-        String indexStandard = "index/standard_analyzer";
+        String indexStandard = "Index/standard_analyzer";
         String cran_path = "cran/cran.all.1400";
 
         final Path cranPath = Paths.get(cran_path);
@@ -154,7 +154,7 @@ public class Indexing {
                         line = bufferedReader.readLine();
                     }
                     //Not storing the words in an attempt to save storage space.
-                    doc.add(new TextField("words", contnt, Field.Store.NO));
+                    doc.add(new TextField("words", contnt, Field.Store.YES));
                     contnt = "";
                 }
                 writer.addDocument(doc);
