@@ -28,18 +28,29 @@ public class SearchQuery {
 
     public void srch() throws Exception {
 
-    	String indexEnglish = "Index/English_analyzer";
+        String indexEnglish = "Index/English_analyzer";
         String indexStandard = "Index/standard_analyzer";
         String indexSimple = "Index/simple_analyzer";
+        String indexEnglish2 = "Index/English_analyzer_bm25";        
+        String indexStandard2 = "Index/standard_analyzer_bm25";
+        String indexSimple2 = "Index/simple_analyzer_bm25";
         String queryString = "";
-
+        
+        //Reader for Classic Similarity
         IndexReader reader1 = DirectoryReader.open(FSDirectory.open(Paths.get(indexEnglish)));
         IndexReader reader2 = DirectoryReader.open(FSDirectory.open(Paths.get(indexStandard)));
         IndexReader reader3 = DirectoryReader.open(FSDirectory.open(Paths.get(indexSimple)));
+        //Reader for BM25 Similarity
+        IndexReader reader11 = DirectoryReader.open(FSDirectory.open(Paths.get(indexEnglish2)));
+        IndexReader reader22 = DirectoryReader.open(FSDirectory.open(Paths.get(indexStandard2)));
+        IndexReader reader33 = DirectoryReader.open(FSDirectory.open(Paths.get(indexSimple2)));
         
         IndexSearcher search_english = new IndexSearcher(reader1);
         IndexSearcher search_stndrd = new IndexSearcher(reader2);
         IndexSearcher search_simple = new IndexSearcher(reader2);
+        IndexSearcher search_english2 = new IndexSearcher(reader11);
+        IndexSearcher search_stndrd2 = new IndexSearcher(reader22);
+        IndexSearcher search_simple2 = new IndexSearcher(reader33);
 
         //Analyzer analyzer = new WhitespaceAnalyzer();
         Analyzer sAnalyzer = new StandardAnalyzer();
@@ -67,6 +78,9 @@ public class SearchQuery {
         search_english.setSimilarity(new ClassicSimilarity());
         search_stndrd.setSimilarity(new ClassicSimilarity());
         search_simple.setSimilarity(new ClassicSimilarity());
+        search_english2.setSimilarity(new ClassicSimilarity());
+        search_stndrd2.setSimilarity(new ClassicSimilarity());
+        search_simple2.setSimilarity(new ClassicSimilarity());
 
 //        search_english.setSimilarity(new MultiSimilarity(new Similarity[]{new BM25Similarity(),new ClassicSimilarity()}));
 //        search_stndrd.setSimilarity(new MultiSimilarity(new Similarity[]{new BM25Similarity(),new ClassicSimilarity()}));
@@ -83,6 +97,9 @@ public class SearchQuery {
         MultiFieldQueryParser englishParser = new MultiFieldQueryParser(new String[]{"Title", "Words"}, eAnalyser);
         MultiFieldQueryParser standardParser = new MultiFieldQueryParser(new String[]{"Title", "Words"}, sAnalyzer);
         MultiFieldQueryParser simpleParser = new MultiFieldQueryParser(new String[]{"Title", "Words"}, simpleAnalyzer);
+        MultiFieldQueryParser englishParser2 = new MultiFieldQueryParser(new String[]{"Title", "Words"}, eAnalyser);
+        MultiFieldQueryParser standardParser2 = new MultiFieldQueryParser(new String[]{"Title", "Words"}, sAnalyzer);
+        MultiFieldQueryParser simpleParser2 = new MultiFieldQueryParser(new String[]{"Title", "Words"}, simpleAnalyzer);
 
         String currentLine = bufferedReader.readLine();
 
@@ -108,10 +125,16 @@ public class SearchQuery {
             Query query1 = englishParser.parse(QueryParser.escape(queryString));
             Query query2 = standardParser.parse(QueryParser.escape(queryString));
             Query query3 = simpleParser.parse(QueryParser.escape(queryString));
+            Query query11 = englishParser2.parse(QueryParser.escape(queryString));
+            Query query22 = standardParser2.parse(QueryParser.escape(queryString));
+            Query query33 = simpleParser2.parse(QueryParser.escape(queryString));
             queryString = "";
             performSearch(search_english, pwenglish, Integer.parseInt(id), query1);
             performSearch(search_stndrd, pwstndrd, Integer.parseInt(id), query2);
             performSearch(search_simple, pwsimple, Integer.parseInt(id), query3);
+            performSearch(search_english, pwenglish, Integer.parseInt(id), query11);
+            performSearch(search_stndrd, pwstndrd, Integer.parseInt(id), query22);
+            performSearch(search_simple, pwsimple, Integer.parseInt(id), query33);
         }
 
         System.out.println("Results have been written to the 'results_english.txt' and 'results_standard.txt' file.");
