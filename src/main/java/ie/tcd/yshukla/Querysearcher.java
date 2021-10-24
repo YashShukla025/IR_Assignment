@@ -70,8 +70,8 @@ public class Querysearcher {
 
         String queriesPath = "cran/cran.qry";
         BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(queriesPath), StandardCharsets.UTF_8);
-        MultiFieldQueryParser englishParser = new MultiFieldQueryParser(new String[]{"title", "words"}, eAnalyser);
-        MultiFieldQueryParser standardParser = new MultiFieldQueryParser(new String[]{"title", "words"}, sAnalyzer);
+        MultiFieldQueryParser englishParser = new MultiFieldQueryParser(new String[]{"Title", "Words"}, eAnalyser);
+        MultiFieldQueryParser standardParser = new MultiFieldQueryParser(new String[]{"Title", "Words"}, sAnalyzer);
 
         String currentLine = bufferedReader.readLine();
 

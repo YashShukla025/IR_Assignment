@@ -154,7 +154,7 @@ public class Indexing {
                         line = bufferedReader.readLine();
                     }
                     //Not storing the words in an attempt to save storage space.
-                    doc.add(new TextField("words", contnt, Field.Store.YES));
+                    doc.add(new TextField("Words", contnt, Field.Store.YES));
                     contnt = "";
                 }
                 writer.addDocument(doc);
