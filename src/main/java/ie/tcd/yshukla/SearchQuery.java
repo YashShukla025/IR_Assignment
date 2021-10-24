@@ -60,10 +60,16 @@ public class SearchQuery {
         String path_english = "results_english.txt";
         String path_stndrd = "results_standard.txt";
         String path_simple = "results_simple.txt";
+        String path_english2 = "results_english_BM25.txt";
+        String path_stndrd2 = "results_standard_BM25.txt";
+        String path_simple2 = "results_simple_BM25.txt";
         
         PrintWriter pwenglish = new PrintWriter(path_english, "UTF-8");
         PrintWriter pwstndrd = new PrintWriter(path_stndrd, "UTF-8");
         PrintWriter pwsimple = new PrintWriter(path_simple, "UTF-8");
+        PrintWriter pwenglish2 = new PrintWriter(path_english2, "UTF-8");
+        PrintWriter pwstndrd2 = new PrintWriter(path_stndrd2, "UTF-8");
+        PrintWriter pwsimple2 = new PrintWriter(path_simple2, "UTF-8");
 
         //BM25 Similarity
         //searcher.setSimilarity(new BM25Similarity());
@@ -132,9 +138,9 @@ public class SearchQuery {
             performSearch(search_english, pwenglish, Integer.parseInt(id), query1);
             performSearch(search_stndrd, pwstndrd, Integer.parseInt(id), query2);
             performSearch(search_simple, pwsimple, Integer.parseInt(id), query3);
-            performSearch(search_english, pwenglish, Integer.parseInt(id), query11);
-            performSearch(search_stndrd, pwstndrd, Integer.parseInt(id), query22);
-            performSearch(search_simple, pwsimple, Integer.parseInt(id), query33);
+            performSearch(search_english, pwenglish2, Integer.parseInt(id), query11);
+            performSearch(search_stndrd, pwstndrd2, Integer.parseInt(id), query22);
+            performSearch(search_simple, pwsimple2, Integer.parseInt(id), query33);
         }
 
         System.out.println("Results have been written to the 'results_english.txt' and 'results_standard.txt' file.");
